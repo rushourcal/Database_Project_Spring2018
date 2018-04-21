@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 21, 2018 at 06:50 AM
+-- Generation Time: Apr 21, 2018 at 10:34 PM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.7
 
@@ -93,6 +93,14 @@ CREATE TABLE `directors` (
   `Dir_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `directors`
+--
+
+INSERT INTO `directors` (`Dir_id`, `Dir_name`) VALUES
+(1, 'T.Est'),
+(2, 'D.Irector');
+
 -- --------------------------------------------------------
 
 --
@@ -104,12 +112,21 @@ CREATE TABLE `items` (
   `Subject_id` int(11) NOT NULL,
   `Description` varchar(256) DEFAULT NULL,
   `Price` decimal(10,2) NOT NULL,
-  `Item_image` varbinary(65000) NOT NULL,
+  `Item_image` varbinary(65000) DEFAULT NULL,
   `Author_id` int(11) DEFAULT NULL,
   `Pub_id` int(11) DEFAULT NULL,
   `Director_id` int(11) DEFAULT NULL,
   `Item_type` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`Item_id`, `Subject_id`, `Description`, `Price`, `Item_image`, `Author_id`, `Pub_id`, `Director_id`, `Item_type`) VALUES
+(11111, 1, 'star wars fanfiction', 9.99, NULL, 2, NULL, NULL, '1'),
+(22222, 2, 'treefiddy', 3.50, NULL, 2, NULL, NULL, '1'),
+(33333, 3, 'Entered through form', 12.85, NULL, 1, NULL, NULL, '1');
 
 -- --------------------------------------------------------
 
@@ -137,6 +154,14 @@ CREATE TABLE `publishers` (
   `Pub_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `publishers`
+--
+
+INSERT INTO `publishers` (`Pub_id`, `Pub_name`) VALUES
+(1, 'T.Est'),
+(2, 'P.Ublisher');
+
 -- --------------------------------------------------------
 
 --
@@ -161,6 +186,15 @@ CREATE TABLE `subject` (
   `Subject_id` int(11) NOT NULL,
   `Subj_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `subject`
+--
+
+INSERT INTO `subject` (`Subject_id`, `Subj_name`) VALUES
+(1, 'Sci-Fi'),
+(2, 'Adventure'),
+(3, 'Psychological');
 
 --
 -- Indexes for dumped tables
@@ -255,12 +289,7 @@ ALTER TABLE `customer_payments`
 -- AUTO_INCREMENT for table `directors`
 --
 ALTER TABLE `directors`
-  MODIFY `Dir_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `items`
---
-ALTER TABLE `items`
-  MODIFY `Item_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Dir_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `orders`
 --
@@ -270,7 +299,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `publishers`
 --
 ALTER TABLE `publishers`
-  MODIFY `Pub_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Pub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `staff`
 --
@@ -280,7 +309,7 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `Subject_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --
