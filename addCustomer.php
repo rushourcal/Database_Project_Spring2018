@@ -1,46 +1,46 @@
 <title>Add Customer</title>
 
 	<body>
-		<p>Enter the necessary information to add a customer *updated*</p>
+		<p>Enter the necessary information to add a customer</p>
 		<form name="addCustomer" method= "POST"> 
 
             <table>
                 <tr>
                     <td>Customer's Full Name<a title = "Required">*</a></td>
                     <td>
-                        <input type="text" name="C_Name" placeholder="J.Smith" pattern="[A-Z]\.[A-Z][a-z]{0,37}" title="J.Smith, no more than 40 characters">
+                        <input type="text" name="C_Name" placeholder="J.Smith" pattern="[A-Z]\.[A-Z][a-z]{0,37}" title="J.Smith, no more than 40 characters" required>
                     </td>
                 </tr>
 				<tr>
                     <td>Customer's Phone Number<a title = "Required">*</a></td>
                     <td>
-                        <input type="text" name="C_Phone" placeholder="XXX-XXX-XXXX" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="XXX-XXX-XXXX, numbers only.">
+                        <input type="text" name="C_Phone" placeholder="XXX-XXX-XXXX" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="XXX-XXX-XXXX, numbers only." required>
                     </td>
                 </tr>
 				<tr>
                     <td>Customer's Password<a title = "Required">*</a></td>
                     <td>
-                        <input type="text" name="C_Password" placeholder="P4ssw0rd" pattern="[a-zA-Z0-9]{8,12}" title="8-12 characters using a-z, A-Z, or 0-9">
+                        <input type="text" name="C_Password" placeholder="P4ssw0rd" pattern="[a-zA-Z0-9]{8,12}" title="8-12 characters using a-z, A-Z, or 0-9" required>
                     </td>
                 </tr>
 				<tr>
                     <td>Customer's Username<a title = "Required">*</a></td>
                     <td>
-                        <input type="text" name="C_Username" placeholder="Username" pattern="[a-zA-Z0-9]{8,12}" title="8-12 characters using a-z, A-Z, or 0-9">
+                        <input type="text" name="C_Username" placeholder="Username" pattern="[a-zA-Z0-9]{8,12}" title="8-12 characters using a-z, A-Z, or 0-9" required>
 						<span id="name_status"></span>
 					</td>
                 </tr>
 				<tr>
                     <td>Customer's Email<a title = "Required">*</a></td>
                     <td>
-                        <input type="text" name="C_Email" placeholder="me@email.com" pattern=".{1,40}@.{1,40}\..{1,18}" title="me@email.com up to 100 characters">
+                        <input type="text" name="C_Email" placeholder="me@email.com" pattern=".{1,40}@.{1,40}\..{1,18}" title="me@email.com up to 100 characters" required>
 						<span id="email_status"></span>
 					</td>
                 </tr>
 				<tr>
                     <td>Customer's Address<a title = "Required">*</a></td>
                     <td>
-                        <input type="text" name="C_Address" placeholder="123 real road, state, zip">
+                        <input type="text" name="C_Address" placeholder="123 real road, state, zip" required>
                     </td>
                 </tr>
                 
@@ -93,5 +93,6 @@
                 </tr>
             </table>
         </form>
+		<p><a href="index.php">Back</a></p>
 	</body>
 </title>
