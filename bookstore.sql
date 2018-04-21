@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Apr 20, 2018 at 12:34 AM
--- Server version: 5.7.19
--- PHP Version: 5.6.31
+-- Host: localhost:3306
+-- Generation Time: Apr 21, 2018 at 06:42 AM
+-- Server version: 5.6.34-log
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,12 +28,18 @@ SET time_zone = "+00:00";
 -- Table structure for table `authors`
 --
 
-DROP TABLE IF EXISTS `authors`;
-CREATE TABLE IF NOT EXISTS `authors` (
-  `Author_id` int(11) NOT NULL AUTO_INCREMENT,
-  `Author_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`Author_id`)
+CREATE TABLE `authors` (
+  `Author_id` int(11) NOT NULL,
+  `Author_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `authors`
+--
+
+INSERT INTO `authors` (`Author_id`, `Author_name`) VALUES
+(1, 'T.Est'),
+(2, 'A.Uthor');
 
 -- --------------------------------------------------------
 
@@ -41,20 +47,26 @@ CREATE TABLE IF NOT EXISTS `authors` (
 -- Table structure for table `customers`
 --
 
-DROP TABLE IF EXISTS `customers`;
-CREATE TABLE IF NOT EXISTS `customers` (
-  `IdNo` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `customers` (
+  `IdNo` int(11) NOT NULL,
   `Phone` varchar(12) DEFAULT NULL,
   `Password` varchar(12) NOT NULL,
   `Username` varchar(12) NOT NULL,
   `Email` varchar(100) NOT NULL,
   `Address` varchar(256) NOT NULL,
   `Name` varchar(40) NOT NULL,
-  `Created_Date` datetime NOT NULL,
-  PRIMARY KEY (`IdNo`),
-  UNIQUE KEY `Username` (`Username`),
-  UNIQUE KEY `Email` (`Email`)
+  `Created_Date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`IdNo`, `Phone`, `Password`, `Username`, `Email`, `Address`, `Name`, `Created_Date`) VALUES
+(1, '123-456-7890', 'testword', 'testusername', 'testemail@test.com', '123 real street, state, zipcode', 'T.Est', '2018-04-01 00:00:00'),
+(2, '111-111-1111', 'password', 'username', 'email@email.com', '1234 fake road, state, zip', 'Z.Boone', '2018-04-21 01:00:34'),
+(3, '222-222-2222', 'password', 'testuser', 'test@test.com', '4321 fake road, state, zip', 'Z.Boo', '2018-04-21 01:21:38'),
+(5, '333-333-3333', 'marksnotreal', 'markawesome', 'mark@fake.email', 'Mark lives in the mind', 'M.Ark', '2018-04-21 01:39:39');
 
 -- --------------------------------------------------------
 
@@ -62,16 +74,12 @@ CREATE TABLE IF NOT EXISTS `customers` (
 -- Table structure for table `customer_payments`
 --
 
-DROP TABLE IF EXISTS `customer_payments`;
-CREATE TABLE IF NOT EXISTS `customer_payments` (
-  `payment_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `customer_payments` (
+  `payment_id` int(11) NOT NULL,
   `amount` decimal(10,2) NOT NULL,
   `date` datetime NOT NULL,
   `Customer_id` int(11) NOT NULL,
-  `Order_id` int(11) NOT NULL,
-  PRIMARY KEY (`payment_id`),
-  KEY `Customer_id` (`Customer_id`),
-  KEY `Order_id` (`Order_id`)
+  `Order_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -80,11 +88,9 @@ CREATE TABLE IF NOT EXISTS `customer_payments` (
 -- Table structure for table `directors`
 --
 
-DROP TABLE IF EXISTS `directors`;
-CREATE TABLE IF NOT EXISTS `directors` (
-  `Dir_id` int(11) NOT NULL AUTO_INCREMENT,
-  `Dir_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`Dir_id`)
+CREATE TABLE `directors` (
+  `Dir_id` int(11) NOT NULL,
+  `Dir_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -93,9 +99,8 @@ CREATE TABLE IF NOT EXISTS `directors` (
 -- Table structure for table `items`
 --
 
-DROP TABLE IF EXISTS `items`;
-CREATE TABLE IF NOT EXISTS `items` (
-  `Item_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `items` (
+  `Item_id` int(11) NOT NULL,
   `Subject_id` int(11) NOT NULL,
   `Description` varchar(256) DEFAULT NULL,
   `Price` decimal(10,2) NOT NULL,
@@ -103,12 +108,7 @@ CREATE TABLE IF NOT EXISTS `items` (
   `Author_id` int(11) DEFAULT NULL,
   `Pub_id` int(11) DEFAULT NULL,
   `Director_id` int(11) DEFAULT NULL,
-  `Item_type` varchar(10) NOT NULL,
-  PRIMARY KEY (`Item_id`),
-  KEY `Subject_id` (`Subject_id`),
-  KEY `Author_id` (`Author_id`),
-  KEY `Pub_id` (`Pub_id`),
-  KEY `Director_id` (`Director_id`)
+  `Item_type` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -117,19 +117,13 @@ CREATE TABLE IF NOT EXISTS `items` (
 -- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `orders`;
-CREATE TABLE IF NOT EXISTS `orders` (
-  `Order_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `orders` (
+  `Order_id` int(11) NOT NULL,
   `Staff_id` int(11) NOT NULL,
-  `Payment_id` int(11) NOT NULL,
+  `Payment_id` int(11) DEFAULT NULL,
   `Customer_id` int(11) NOT NULL,
-  `Completion_date` datetime NOT NULL,
-  `Item_id` int(11) NOT NULL,
-  PRIMARY KEY (`Order_id`),
-  KEY `Staff_id` (`Staff_id`),
-  KEY `Payment_id` (`Payment_id`),
-  KEY `Customer_id` (`Customer_id`),
-  KEY `Item_id` (`Item_id`)
+  `Completion_date` datetime DEFAULT NULL,
+  `Item_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -138,11 +132,9 @@ CREATE TABLE IF NOT EXISTS `orders` (
 -- Table structure for table `publishers`
 --
 
-DROP TABLE IF EXISTS `publishers`;
-CREATE TABLE IF NOT EXISTS `publishers` (
-  `Pub_id` int(11) NOT NULL AUTO_INCREMENT,
-  `Pub_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`Pub_id`)
+CREATE TABLE `publishers` (
+  `Pub_id` int(11) NOT NULL,
+  `Pub_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -151,14 +143,12 @@ CREATE TABLE IF NOT EXISTS `publishers` (
 -- Table structure for table `staff`
 --
 
-DROP TABLE IF EXISTS `staff`;
-CREATE TABLE IF NOT EXISTS `staff` (
-  `EIN` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `staff` (
+  `EIN` int(11) NOT NULL,
   `Phone` varchar(12) NOT NULL,
   `Position` varchar(20) NOT NULL,
   `Name` varchar(40) NOT NULL,
-  `Address` varchar(256) NOT NULL,
-  PRIMARY KEY (`EIN`)
+  `Address` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -167,13 +157,130 @@ CREATE TABLE IF NOT EXISTS `staff` (
 -- Table structure for table `subject`
 --
 
-DROP TABLE IF EXISTS `subject`;
-CREATE TABLE IF NOT EXISTS `subject` (
-  `Subject_id` int(11) NOT NULL AUTO_INCREMENT,
-  `Subj_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`Subject_id`)
+CREATE TABLE `subject` (
+  `Subject_id` int(11) NOT NULL,
+  `Subj_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `authors`
+--
+ALTER TABLE `authors`
+  ADD PRIMARY KEY (`Author_id`);
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`IdNo`),
+  ADD UNIQUE KEY `Username` (`Username`),
+  ADD UNIQUE KEY `Email` (`Email`);
+
+--
+-- Indexes for table `customer_payments`
+--
+ALTER TABLE `customer_payments`
+  ADD PRIMARY KEY (`payment_id`),
+  ADD KEY `Customer_id` (`Customer_id`),
+  ADD KEY `Order_id` (`Order_id`);
+
+--
+-- Indexes for table `directors`
+--
+ALTER TABLE `directors`
+  ADD PRIMARY KEY (`Dir_id`);
+
+--
+-- Indexes for table `items`
+--
+ALTER TABLE `items`
+  ADD PRIMARY KEY (`Item_id`),
+  ADD KEY `Subject_id` (`Subject_id`),
+  ADD KEY `Author_id` (`Author_id`),
+  ADD KEY `Pub_id` (`Pub_id`),
+  ADD KEY `Director_id` (`Director_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`Order_id`),
+  ADD KEY `Staff_id` (`Staff_id`),
+  ADD KEY `Payment_id` (`Payment_id`),
+  ADD KEY `Customer_id` (`Customer_id`),
+  ADD KEY `Item_id` (`Item_id`);
+
+--
+-- Indexes for table `publishers`
+--
+ALTER TABLE `publishers`
+  ADD PRIMARY KEY (`Pub_id`);
+
+--
+-- Indexes for table `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`EIN`);
+
+--
+-- Indexes for table `subject`
+--
+ALTER TABLE `subject`
+  ADD PRIMARY KEY (`Subject_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `authors`
+--
+ALTER TABLE `authors`
+  MODIFY `Author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `IdNo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `customer_payments`
+--
+ALTER TABLE `customer_payments`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `directors`
+--
+ALTER TABLE `directors`
+  MODIFY `Dir_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `items`
+--
+ALTER TABLE `items`
+  MODIFY `Item_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `Order_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `publishers`
+--
+ALTER TABLE `publishers`
+  MODIFY `Pub_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `staff`
+--
+ALTER TABLE `staff`
+  MODIFY `EIN` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `subject`
+--
+ALTER TABLE `subject`
+  MODIFY `Subject_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
