@@ -50,7 +50,6 @@
                     <?php
 		
 						if (isset($_POST['submit'])){#check if the post value for the submit button is currently stored (sent from previous page's form.)')
-							include_once ('dbconnection.php');
 						#The post values are empty until the first time the submit button is pressed, and emptied/repopulated after 
 						#Another form uses post in the next page. The php code being down below the submit button has nothing to do with the time it is run.
 						#Even if the POST values are not set, this code is looked at before the submit button is pressed.
