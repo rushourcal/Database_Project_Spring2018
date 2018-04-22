@@ -117,13 +117,13 @@
 							$sql = "INSERT INTO `items` (`Item_id`, `Subject_id`, `Description`, `Price`, `Item_image`, ";
 							switch($itemType){
 								case 1:
-									$sql2 = $sql . "`Author_id`, `Item_type`) VALUES ('$Item_id', '$Subject', '$Description', '$Item_Price', NULL, '$Author_ID', '$itemType'); "; 
+									$sql2 = $sql . "`Author_id`, `Item_type`) VALUES ('$Item_id', '$Subject', '$Description', '$Item_Price', NULL, '$Author_ID', 'book'); "; 
 									break;
 								case 2:
-									$sql2 = $sql . "`Director_id`, `Item_type`) VALUES ('$Item_id', '$Subject', '$Description', '$Item_Price', NULL, '$Director_ID', '$itemType'); "; 
+									$sql2 = $sql . "`Director_id`, `Item_type`) VALUES ('$Item_id', '$Subject', '$Description', '$Item_Price', NULL, '$Director_ID', 'film'); "; 
 									break;
 								case 3:
-									$sql2 = $sql . "`Publisher_id`, `Item_type`) VALUES ('$Item_id', '$Subject', '$Description', '$Item_Price', NULL, '$Publisher_ID', '$itemType'); "; 
+									$sql2 = $sql . "`Publisher_id`, `Item_type`) VALUES ('$Item_id', '$Subject', '$Description', '$Item_Price', NULL, '$Publisher_ID', 'periodical'); "; 
 									break;
 
 							}
@@ -134,7 +134,7 @@
 								echo "Query Failed itemType $itemType: $sql2";
 							}
 							mysqli_close($link);
-							exit();
+							//exit();
 						} 
 
                     ?>
