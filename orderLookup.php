@@ -13,6 +13,9 @@
 				</td>
 				<td>
 					<input type="submit" name="submit" value="Submit">
+				</td>
+			</tr>
+		</table>
 					<?php
 						if (isset($_POST['submit']))
 						{
@@ -103,8 +106,5 @@
 							exit();
 						}
 					?>
-				</td>
-			</tr>
-		</table>
 	</form>
 </body>
