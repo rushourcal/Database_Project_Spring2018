@@ -147,7 +147,7 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`Item_id`, `Subject_id`, `Description`, `Price`, `Item_image`, `Author_id`, `Pub_id`, `Director_id`, `Item_type`) VALUES
-(1, 1, 'Book one of the exciting legend series by A.Uthor', 15.99, '', 2, 1, NULL, 'book'),
+(1, 1, 'Book one of the exciting legend series by A.Uthor', 15.99, '', 2, 1, NULL, '1'),
 (11111, 1, 'star wars fanfiction', 9.99, NULL, 2, NULL, NULL, '1'),
 (22222, 2, 'treefiddy', 3.50, NULL, 2, NULL, NULL, '1'),
 (33333, 3, 'Entered through form', 12.85, NULL, 1, NULL, NULL, '1');
@@ -376,6 +376,7 @@ ALTER TABLE `items`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`Customer_id`) REFERENCES `customers` (`IdNo`) ON UPDATE NO ACTION,
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`Payment_id`) REFERENCES `customer_payments` (`payment_id`) ON UPDATE NO ACTION,
   ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`Item_id`) REFERENCES `items` (`Item_id`) ON UPDATE NO ACTION,
   ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`Staff_id`) REFERENCES `staff` (`EIN`) ON UPDATE NO ACTION;
 COMMIT;

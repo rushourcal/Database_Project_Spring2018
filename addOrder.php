@@ -98,8 +98,20 @@
 							$failed = 1;
 						}
 						
+						$setFKcheck = "SET foreign_key_checks = 0;";
+						$result = mysqli_query($link,$setFKcheck);
+						if(!$result){
+							$failed = 1;
+						}
+						
 						$pushUpdate = "UPDATE `orders` SET `Payment_id` = '$payId', `Completion_date` = '$completeDate' WHERE `Order_id` = '$OrderID';";
 						$result = mysqli_query($link,$pushUpdate);
+						if(!$result){
+							$failed = 1;
+						}
+						
+						$setFKcheck = "SET foreign_key_checks = 1;";
+						$result = mysqli_query($link,$setFKcheck);
 						if(!$result){
 							$failed = 1;
 						}
