@@ -84,7 +84,7 @@
 								}
 							}
 							mysqli_close($link);
-							exit();
+							//exit();
 						} 
 
                     ?>
