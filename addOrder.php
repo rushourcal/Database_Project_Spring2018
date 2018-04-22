@@ -39,7 +39,7 @@
 					#The post values are empty until the first time the submit button is pressed, and emptied/repopulated after 
 					#Another form uses post in the next page. The php code being down below the submit button has nothing to do with the time it is run.
 					#Even if the POST values are not set, this code is looked at before the submit button is pressed.
-							#Variables. mysqli_real_escape_string makes input text into a "safe" string for an sqli query. Security against injection.
+					#Variables. mysqli_real_escape_string makes input text into a "safe" string for an sqli query. Security against injection.
 						include_once('dbconnection.php');
 						$Staff_id = mysqli_real_escape_string($link, $_POST['Staff_id']);
 						$Customer_id = mysqli_real_escape_string($link, $_POST['Customer_id']);
@@ -51,6 +51,7 @@
 						$result = mysqli_query($link,$sql2);
 						if(!$result){
 							$failed = 1;
+							echo $sql2;
 						}
 						
 						$getPrice = "SELECT `Price` FROM `items` WHERE '$Item_id' = `Item_id`;";
@@ -76,14 +77,14 @@
 							$failed = 1;
 						}
 						
-						
+						if(!$failed){
 						#send payment to database
 						$pushPayment = "INSERT INTO `customer_payments` (`payment_id`, `amount`, `date`, `Customer_id`, `Order_id`) VALUES (NULL, '$returnedPrice', CURRENT_TIMESTAMP, '$Customer_id', '$OrderID');";
 						$result = mysqli_query($link,$pushPayment);
 						if(!$result){
 							$failed = 1;
 						}
-						
+					
 						#update orders with new payment id and completion date
 						$updateOrder = "SELECT * FROM `customer_payments` ORDER BY `Order_id` DESC LIMIT 1;";
 						$result = mysqli_query($link, $updateOrder);
@@ -95,6 +96,12 @@
 						}
 						else
 						{
+							$failed = 1;
+						}
+					
+						$pushUpdate = "UPDATE `orders` SET `Payment_id` = '$payId', `Completion_date` = '$completeDate' WHERE `Order_id` = '$OrderID';";
+						$result = mysqli_query($link,$pushUpdate);
+						if(!$result){
 							$failed = 1;
 						}
 						
@@ -124,7 +131,6 @@
 						{
 							echo "Successfully added to database!";
 						}
-						
 						mysqli_close($link);
 						exit();
 					} 
