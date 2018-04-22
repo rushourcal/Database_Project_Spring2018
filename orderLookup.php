@@ -4,7 +4,7 @@
 </head>
 <body>
 	<p>Find information about a specific order</p>
-	<form name="addOrder" method= "POST"> 
+	<form name="findOrder" method= "POST"> 
 		<table>
 			<tr>
 				<td>Order ID: </td>
