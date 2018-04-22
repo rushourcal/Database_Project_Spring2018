@@ -29,7 +29,7 @@
 							mysqli_query($link, $sql);
 
 							mysqli_close($link);
-							exit();
+							//exit();
 						} 
 
                     ?>
