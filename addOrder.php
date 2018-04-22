@@ -51,6 +51,7 @@
 						$result = mysqli_query($link,$sql2);
 						if(!$result){
 							$failed = 1;
+							echo $sql2;
 						}
 						
 						$getPrice = "SELECT `Price` FROM `items` WHERE '$Item_id' = `Item_id`;";
@@ -76,43 +77,43 @@
 							$failed = 1;
 						}
 						
+						if(!$failed){
+							#send payment to database
+							$pushPayment = "INSERT INTO `customer_payments` (`payment_id`, `amount`, `date`, `Customer_id`, `Order_id`) VALUES (NULL, '$returnedPrice', CURRENT_TIMESTAMP, '$Customer_id', '$OrderID');";
+							$result = mysqli_query($link,$pushPayment);
+							if(!$result){
+								$failed = 1;
+							}
 						
-						#send payment to database
-						$pushPayment = "INSERT INTO `customer_payments` (`payment_id`, `amount`, `date`, `Customer_id`, `Order_id`) VALUES (NULL, '$returnedPrice', CURRENT_TIMESTAMP, '$Customer_id', '$OrderID');";
-						$result = mysqli_query($link,$pushPayment);
-						if(!$result){
-							$failed = 1;
-						}
+							#update orders with new payment id and completion date
+							$updateOrder = "SELECT * FROM `customer_payments` ORDER BY `Order_id` DESC LIMIT 1;";
+							$result = mysqli_query($link, $updateOrder);
+							if ($result)
+							{
+								$row = mysqli_fetch_assoc($result);
+								$payId =  $row["payment_id"];
+								$completeDate = $row["date"];
+							}
+							else
+							{
+								$failed = 1;
+							}
 						
-						#update orders with new payment id and completion date
-						$updateOrder = "SELECT * FROM `customer_payments` ORDER BY `Order_id` DESC LIMIT 1;";
-						$result = mysqli_query($link, $updateOrder);
-						if ($result)
-						{
-							$row = mysqli_fetch_assoc($result);
-							$payId =  $row["payment_id"];
-							$completeDate = $row["date"];
-						}
-						else
-						{
-							$failed = 1;
-						}
+							$pushUpdate = "UPDATE `orders` SET `Payment_id` = '$payId', `Completion_date` = '$completeDate' WHERE `Order_id` = '$OrderID';";
+							$result = mysqli_query($link,$pushUpdate);
+							if(!$result){
+								$failed = 1;
+							}
 						
-						$pushUpdate = "UPDATE `orders` SET `Payment_id` = '$payId', `Completion_date` = '$completeDate' WHERE `Order_id` = '$OrderID';";
-						$result = mysqli_query($link,$pushUpdate);
-						if(!$result){
-							$failed = 1;
+							if ($failed)
+							{
+								echo mysqli_error($link);
+							}
+							else
+							{
+								echo "Successfully added to database!";
+							}
 						}
-						
-						if ($failed)
-						{
-							echo mysqli_error($link);
-						}
-						else
-						{
-							echo "Successfully added to database!";
-						}
-						
 						mysqli_close($link);
 						exit();
 					} 

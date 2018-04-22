@@ -6,6 +6,8 @@
 <p><a href="addItem.php">Add Item</a></p>
 <p><a href="addOrder.php">Add Order</a></p>
 <p><a href="adjustItems.php">Change Item</a></p>
+<p><a href="orderlookup.php">Order Lookup</a></p>
+<p><a href="itemsSold.php">Item Sales</a></p>
 <p>More soon</p>
 </body>
 </title>
