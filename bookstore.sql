@@ -376,7 +376,6 @@ ALTER TABLE `items`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`Customer_id`) REFERENCES `customers` (`IdNo`) ON UPDATE NO ACTION,
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`Payment_id`) REFERENCES `customer_payments` (`payment_id`) ON UPDATE NO ACTION,
   ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`Item_id`) REFERENCES `items` (`Item_id`) ON UPDATE NO ACTION,
   ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`Staff_id`) REFERENCES `staff` (`EIN`) ON UPDATE NO ACTION;
 COMMIT;
