@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 23, 2018 at 02:58 AM
+-- Generation Time: Apr 23, 2018 at 03:25 AM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.7
 
@@ -56,7 +56,7 @@ CREATE TABLE `customers` (
   `Address` varchar(256) NOT NULL,
   `Name` varchar(40) NOT NULL,
   `Created_Date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Inactive` varchar(10) DEFAULT NULL
+  `Inactive` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
