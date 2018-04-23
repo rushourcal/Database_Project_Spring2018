@@ -10,5 +10,8 @@
 <p><a href="orderLookup.php">Lookup Order</a></p>
 <p><a href="customerLookup.php">Lookup Customer Purchases</a></p>
 <p><a href="deleteCustomer.php">Remove Customer</a></p>
+
+
+<p><a href="showTables.php">Show all tables (for #2 in part 3)</a></p>
 </body>
 </title>
