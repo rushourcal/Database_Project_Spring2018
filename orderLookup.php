@@ -74,7 +74,14 @@
 				if ($result = mysqli_query($link, $getCust))
 				{
 					$row = mysqli_fetch_assoc($result);
-					$custName = $row["Name"];
+					if ($row["Inactive"])
+					{
+						$custName = "Deleted";
+					}
+					else
+					{
+						$custName = $row["Name"];
+					}
 				}
 				else
 				{
