@@ -132,7 +132,6 @@
 							echo "Successfully added to database!";
 						}
 						mysqli_close($link);
-						exit();
 					} 
 
 				?>

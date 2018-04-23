@@ -67,6 +67,7 @@
 			}
 			echo "</tr>";
 		}
+		mysqli_close($link);
 	}
 ?>
 </head>
