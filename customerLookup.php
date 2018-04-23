@@ -3,6 +3,9 @@
 
 </head>
 <body>
+	<p>Zachariah Boone</p>
+	<p>Michael Teixeira</p>
+	<p>Kyle Teixeira</p>
 	<p>Enter customer ID to display purchased items</p>
 	<form name="findItems" method= "POST"> 
 		<table>

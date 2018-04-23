@@ -21,6 +21,7 @@
 		$sql = "SELECT * FROM `$Title` ;";
 		$result = mysqli_query($link, $sql);
 		$num_rows = mysqli_num_rows($result);
+		echo $sql;
 		echo $num_rows;
 		switch($Title){
 			case "authors":
@@ -72,6 +73,10 @@
 ?>
 </head>
 <body>
+	<p>Zachariah Boone</p>
+	<p>Michael Teixeira</p>
+	<p>Kyle Teixeira</p>
+	<p><a href="index.php">Back</a></p>
 	<p> Showing all tables and values in Database </p>
 	<p> authors </p>
 	<table border = '1'>

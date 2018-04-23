@@ -1,6 +1,9 @@
 <title>Add Customer</title>
 
 	<body>
+		<p>Zachariah Boone</p>
+		<p>Michael Teixeira</p>
+		<p>Kyle Teixeira</p>
 		<p>Enter the necessary information to add a customer</p>
 		<form name="addCustomer" method= "POST"> 
 
