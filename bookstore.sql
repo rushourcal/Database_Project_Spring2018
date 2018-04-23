@@ -55,33 +55,34 @@ CREATE TABLE `customers` (
   `Email` varchar(100) NOT NULL,
   `Address` varchar(256) NOT NULL,
   `Name` varchar(40) NOT NULL,
-  `Created_Date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `Created_Date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Inactive` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`IdNo`, `Phone`, `Password`, `Username`, `Email`, `Address`, `Name`, `Created_Date`) VALUES
-(1, '123-456-7890', 'testword', 'testusername', 'testemail@test.com', '123 real street, state, zipcode', 'T.Est', '2018-04-01 00:00:00'),
-(2, '111-111-1111', 'password', 'username', 'email@email.com', '1234 fake road, state, zip', 'Z.Boone', '2018-04-21 01:00:34'),
-(3, '222-222-2222', 'password', 'testuser', 'test@test.com', '4321 fake road, state, zip', 'Z.Boo', '2018-04-21 01:21:38'),
-(5, '333-333-3333', 'marksnotreal', 'markawesome', 'mark@fake.email', 'Mark lives in the mind', 'M.Ark', '2018-04-21 01:39:39'),
-(6, '111-111-1111', 'password', 'user6', 'jim.bob@gmail.com', '123 street dr', 'Jim Bob', '2018-04-21 15:25:24'),
-(7, '987-654-3210', 'dog27', 'alex.pass', 'alex.pass@gmail.com', '561 E. South Street', 'Alex Pass', '2018-04-21 15:28:17'),
-(8, '644-645-5466', 'monkey289', 'thedude', 'thedude@gmail.com', '1000 Rug Ave.', 'The Dude', '2018-04-21 15:30:00'),
-(9, '654-972-3871', 'heybrother', 'ripavicii', 'aviciifan223@gmail.com', '793 main st', 'Dan Smith', '2018-04-21 15:46:08'),
-(10, '648-541-5789', 'whovian123', 'TheDoctor', 'galifrey@aol.com', '87 Smith Ln.', 'Mike Applebottom', '2018-04-21 15:49:06'),
-(11, '546-972-3499', 'order66', 'theChosenOne', 'jedimaster4657@yahoo.com', '561 Broad St.', 'Matt Johnson', '2018-04-21 15:51:16'),
-(12, '564-913-3189', 'sam&dean', 'yellowEye', 'menofletters@secret.org', '321 Bunker Dr.', 'Charles Crowley', '2018-04-21 15:56:28'),
-(13, '666-333-9147', 'gryfindor11', 'dragonslayer', 'platform9&34ths@hoggwarts.edu', '253 Durrey Ln.', 'Harry Potter', '2018-04-21 15:57:25'),
-(14, '546-799-3156', 'aldy214', 'Jame.A', 'James.A@gmail.com', '23 Shoe Dr.', 'James Aldridge', '2018-04-21 16:00:45'),
-(15, '466-798-4687', '1qaz@WSX', 'Billy.Gates', 'Billy.Gates@microsoft.com', '23 Microsoft Ave.', 'Bill Gates', '2018-04-21 16:03:11'),
-(16, '645-656-4321', 'lambo21', 'natyp', 'natyp@yahoo.com', '32 Stumpy Rd.', 'Natalie Katowski', '2018-04-21 16:05:35'),
-(17, '468-381-7391', 'mrsnuffles', 'lovemycat', 'lovemycat212@gmail.com', '8087 Speedy Ct.', 'Tammy Linkler', '2018-04-21 16:07:30'),
-(18, '546-554-5849', 'password1', 'tomrad', 'tomrad@gamil.com', '54852 Cats Pl.', 'Tom Conrad', '2018-04-21 17:25:37'),
-(19, '456-465-5564', 'makonhs', 'jakethegreat', 'jakethegreat@yahoo.com', '908 Bike Trl Rd.', 'Jake Makon', '2018-04-21 17:32:56'),
-(20, '867-234-8534', 'danworth421', 'jared.dan', 'jared.dan@aol.com', '7876 66th St W.', 'Jared Danworth', '2018-04-21 17:34:51');
+INSERT INTO `customers` (`IdNo`, `Phone`, `Password`, `Username`, `Email`, `Address`, `Name`, `Created_Date`, `Inactive`) VALUES
+(1, '123-456-7890', 'testword', 'testusername', 'testemail@test.com', '123 real street, state, zipcode', 'T.Est', '2018-04-01 00:00:00', NULL),
+(2, '111-111-1111', 'password', 'username', 'email@email.com', '1234 fake road, state, zip', 'Z.Boone', '2018-04-21 01:00:34', NULL),
+(3, '222-222-2222', 'password', 'testuser', 'test@test.com', '4321 fake road, state, zip', 'Z.Boo', '2018-04-21 01:21:38', NULL),
+(5, '333-333-3333', 'marksnotreal', 'markawesome', 'mark@fake.email', 'Mark lives in the mind', 'M.Ark', '2018-04-21 01:39:39', NULL),
+(6, '111-111-1111', 'password', 'user6', 'jim.bob@gmail.com', '123 street dr', 'Jim Bob', '2018-04-21 15:25:24', NULL),
+(7, '987-654-3210', 'dog27', 'alex.pass', 'alex.pass@gmail.com', '561 E. South Street', 'Alex Pass', '2018-04-21 15:28:17', NULL),
+(8, '644-645-5466', 'monkey289', 'thedude', 'thedude@gmail.com', '1000 Rug Ave.', 'The Dude', '2018-04-21 15:30:00', NULL),
+(9, '654-972-3871', 'heybrother', 'ripavicii', 'aviciifan223@gmail.com', '793 main st', 'Dan Smith', '2018-04-21 15:46:08', NULL),
+(10, '648-541-5789', 'whovian123', 'TheDoctor', 'galifrey@aol.com', '87 Smith Ln.', 'Mike Applebottom', '2018-04-21 15:49:06', NULL),
+(11, '546-972-3499', 'order66', 'theChosenOne', 'jedimaster4657@yahoo.com', '561 Broad St.', 'Matt Johnson', '2018-04-21 15:51:16', NULL),
+(12, '564-913-3189', 'sam&dean', 'yellowEye', 'menofletters@secret.org', '321 Bunker Dr.', 'Charles Crowley', '2018-04-21 15:56:28', NULL),
+(13, '666-333-9147', 'gryfindor11', 'dragonslayer', 'platform9&34ths@hoggwarts.edu', '253 Durrey Ln.', 'Harry Potter', '2018-04-21 15:57:25', NULL),
+(14, '546-799-3156', 'aldy214', 'Jame.A', 'James.A@gmail.com', '23 Shoe Dr.', 'James Aldridge', '2018-04-21 16:00:45', NULL),
+(15, '466-798-4687', '1qaz@WSX', 'Billy.Gates', 'Billy.Gates@microsoft.com', '23 Microsoft Ave.', 'Bill Gates', '2018-04-21 16:03:11', NULL),
+(16, '645-656-4321', 'lambo21', 'natyp', 'natyp@yahoo.com', '32 Stumpy Rd.', 'Natalie Katowski', '2018-04-21 16:05:35', NULL),
+(17, '468-381-7391', 'mrsnuffles', 'lovemycat', 'lovemycat212@gmail.com', '8087 Speedy Ct.', 'Tammy Linkler', '2018-04-21 16:07:30', NULL),
+(18, '546-554-5849', 'password1', 'tomrad', 'tomrad@gamil.com', '54852 Cats Pl.', 'Tom Conrad', '2018-04-21 17:25:37', NULL),
+(19, '456-465-5564', 'makonhs', 'jakethegreat', 'jakethegreat@yahoo.com', '908 Bike Trl Rd.', 'Jake Makon', '2018-04-21 17:32:56', NULL),
+(20, '867-234-8534', 'danworth421', 'jared.dan', 'jared.dan@aol.com', '7876 66th St W.', 'Jared Danworth', '2018-04-21 17:34:51', NULL);
 
 -- --------------------------------------------------------
 
