@@ -61,6 +61,7 @@
 						echo "<p>No results found for ".$itemType."s</p>";
 					}
 				}
+				mysqli_close($link);
 			}
 		?>
 	</form>
