@@ -72,6 +72,9 @@
 	</script>
 </head>
 	<body>
+		<p>Zachariah Boone</p>
+		<p>Michael Teixeira</p>
+		<p>Kyle Teixeira</p>
 		<p>Enter the necessary information to add an item</p>
 		<form name="addItem" method= "POST"> 
 			<table>

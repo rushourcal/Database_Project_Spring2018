@@ -25,6 +25,9 @@
 	</script>
 </head>
 	<body>
+		<p>Zachariah Boone</p>
+		<p>Michael Teixeira</p>
+		<p>Kyle Teixeira</p>
 		<p>Enter the necessary information to add an item</p>
 		<form name="addItem" method= "POST"> 
 			<table>
@@ -78,7 +81,7 @@
 				<tr  id="directorSelector" name="directorSelector" style="display: none;">
                     <td>Item's Director<a title = "Required">*</a></td>
                     <td>
-                        <select id="directorSelection">
+                        <select id="directorSelection" name="directorSelection">
 							<option value="1">T.Est</option>
 							<option value="2">D.Irector</option>
 						</select>
@@ -87,7 +90,7 @@
 				<tr id="publisherSelector" name="publisherSelector" style="display: none;">
                     <td>Item's Publisher<a title = "Required">*</a></td>
                     <td>
-                        <select id="publisherSelection">
+                        <select id="publisherSelection" name="publisherSelection">
 							<option value="1">T.Est</option>
 							<option value="2">P.Ublisher</option>
 						</select>
@@ -123,7 +126,7 @@
 									$sql2 = $sql . "`Director_id`, `Item_type`) VALUES ('$Item_id', '$Subject', '$Description', '$Item_Price', NULL, '$Director_ID', 'film'); "; 
 									break;
 								case 3:
-									$sql2 = $sql . "`Publisher_id`, `Item_type`) VALUES ('$Item_id', '$Subject', '$Description', '$Item_Price', NULL, '$Publisher_ID', 'periodical'); "; 
+									$sql2 = $sql . "`Pub_id`, `Item_type`) VALUES ('$Item_id', '$Subject', '$Description', '$Item_Price', NULL, '$Publisher_ID', 'periodical'); "; 
 									break;
 
 							}

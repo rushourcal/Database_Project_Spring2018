@@ -3,6 +3,9 @@
 
 </head>
 <body>
+	<p>Zachariah Boone</p>
+	<p>Michael Teixeira</p>
+	<p>Kyle Teixeira</p>
 	<p>Find information about how many items have been sold of each type</p>
 	<form name="addOrder" method= "POST"> 
 		<table>
