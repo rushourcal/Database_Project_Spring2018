@@ -24,6 +24,24 @@
 				$custID = (int)mysqli_real_escape_string($link, $_POST['Customer_id']);
 				$failed = 0;
 				
+				$getCust = "SELECT * FROM `customers` WHERE `IdNo` = '$custID';";
+				if ($result = mysqli_query($link, $getCust))
+				{
+					$row = mysqli_fetch_assoc($result);
+					$deleted = $row["Inactive"];
+					
+					if ($deleted)
+					{
+						echo "No results found.";
+						mysqli_close($link);
+					}
+				}
+				else
+				{
+					$failed = 1;
+					echo mysqli_error($link);
+				}
+				
 				$getOrders = "SELECT * FROM `orders` WHERE `Customer_id` = '$custID';";
 				if ($result = mysqli_query($link, $getOrders))
 				{
