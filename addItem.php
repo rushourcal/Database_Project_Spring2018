@@ -1,3 +1,8 @@
+<?php 
+session_name("database2018");
+session_start();
+include('adminCheck.php');
+?>
 <title>Add Item</title>
 <head>
 	<script>
@@ -146,5 +151,8 @@
             </table>
         </form>
 		<p><a href="index.php">Back</a></p>
+		<form action="logout.php">
+			<input type="submit" name="logout" value="Logout">
+		</form>
 	</body>
 </title>

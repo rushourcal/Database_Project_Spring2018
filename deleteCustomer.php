@@ -1,3 +1,8 @@
+<?php 
+session_name("database2018");
+session_start();
+include('adminCheck.php');
+?>
 <title>Remove Customer</title>
 <head>
 
@@ -51,7 +56,7 @@
 			
 			if (!$failed)
 			{
-				$delCust = "UPDATE `customers` SET `Phone` = '$custID', `Password` = '$custID', `Username` = '$custID', `Email` = '$custID', `Address` = '$custID', `Name` = '$custID', `Created_Date` = CURRENT_TIMESTAMP, `Inactive` = TRUE WHERE `IdNo` = '$custID';";
+				$delCust = "UPDATE `customers` SET `Phone` = 'NULL', `Password` = NULL, `Username` = '$custID', `Email` = '$custID', `Address` = NULL, `Created_Date` = CURRENT_TIMESTAMP, `Inactive` = TRUE WHERE `IdNo` = '$custID';";
 				if (!$result = mysqli_query($link, $delCust))
 				{
 					$failed = 1;
@@ -72,4 +77,7 @@
 		}
 	?>
 	<p><a href="index.php">Back</a></p>
+	<form action="logout.php">
+			<input type="submit" name="logout" value="Logout">
+	</form>
 </body>

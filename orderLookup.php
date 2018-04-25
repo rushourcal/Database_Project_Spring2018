@@ -1,3 +1,8 @@
+<?php 
+session_name("database2018");
+session_start();
+include('adminCheck.php');
+?>
 <title>Lookup Order</title>
 <head>
 
@@ -41,7 +46,8 @@
 					$paymentID = $row["Payment_id"];
 					$custID = $row["Customer_id"];
 					$completeDate = $row["Completion_date"];
-					$itemID = $row["Item_id"];
+					$itemList = $row["Item_list"];
+					$totalPrice = $row["Total_price"];
 				}
 				else
 				{
@@ -92,7 +98,7 @@
 					echo mysqli_error($link);
 				}
 				
-				$getItem = "SELECT * FROM `items` WHERE `Item_id` = '$itemID';";
+				/*$getItem = "SELECT * FROM `items` WHERE `Item_id` = '$itemID';";
 				if ($result = mysqli_query($link, $getItem))
 				{
 					$row = mysqli_fetch_assoc($result);
@@ -103,7 +109,7 @@
 				{
 					$failed = 1;
 					echo mysqli_error($link);
-				}
+				}*/
 				
 				if ($failed)
 				{
@@ -119,8 +125,8 @@
 					echo		"<th>Staff Name</th>";
 					echo		"<th>Customer ID</th>";
 					echo		"<th>Customer Name</th>";
-					echo		"<th>Item ID</th>";
-					echo		"<th>Item Description</th>";
+					echo		"<th>Item IDs</th>";
+					//echo		"<th>Item Description</th>";
 					echo		"<th>Price</th>";
 					echo		"<th>Payment ID</th>";
 					echo		"<th>Payment Amount</th>";
@@ -132,9 +138,9 @@
 					echo		"<td>". $staffName. "</td>";
 					echo		"<td>". $custID. "</td>";
 					echo		"<td>". $custName. "</td>";
-					echo		"<td>". $itemID. "</td>";
-					echo		"<td>". $itemDes. "</td>";
-					echo		"<td>". $itemPrice. "</td>";
+					echo		"<td>". $itemList. "</td>";
+					//echo		"<td>". $itemDes. "</td>";
+					echo		"<td>". $totalPrice. "</td>";
 					echo		"<td>". $paymentID. "</td>";
 					echo		"<td>". $payAmount. "</td>";
 					echo		"<td>". $completeDate. "</td>";
@@ -147,4 +153,7 @@
 		?>
 	</form>
 	<p><a href="index.php">Back</a></p>
+	<form action="logout.php">
+			<input type="submit" name="logout" value="Logout">
+	</form>
 </body>
