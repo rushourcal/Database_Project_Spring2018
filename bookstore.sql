@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 23, 2018 at 03:25 AM
+-- Generation Time: Apr 25, 2018 at 03:37 AM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.7
 
@@ -50,10 +50,10 @@ INSERT INTO `authors` (`Author_id`, `Author_name`) VALUES
 CREATE TABLE `customers` (
   `IdNo` int(11) NOT NULL,
   `Phone` varchar(12) DEFAULT NULL,
-  `Password` varchar(12) NOT NULL,
+  `Password` varchar(12) DEFAULT NULL,
   `Username` varchar(12) NOT NULL,
   `Email` varchar(100) NOT NULL,
-  `Address` varchar(256) NOT NULL,
+  `Address` varchar(256) DEFAULT NULL,
   `Name` varchar(40) NOT NULL,
   `Created_Date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Inactive` tinyint(1) DEFAULT NULL
@@ -83,7 +83,8 @@ INSERT INTO `customers` (`IdNo`, `Phone`, `Password`, `Username`, `Email`, `Addr
 (18, '546-554-5849', 'password1', 'tomrad', 'tomrad@gamil.com', '54852 Cats Pl.', 'Tom Conrad', '2018-04-21 17:25:37', NULL),
 (19, '456-465-5564', 'makonhs', 'jakethegreat', 'jakethegreat@yahoo.com', '908 Bike Trl Rd.', 'Jake Makon', '2018-04-21 17:32:56', NULL),
 (20, '867-234-8534', 'danworth421', 'jared.dan', 'jared.dan@aol.com', '7876 66th St W.', 'Jared Danworth', '2018-04-21 17:34:51', NULL),
-(21, '555-555-5555', 'password', 'oldSpice', 'tCrews@fake.email', '11 Deodorant Street', 'T.Crews', '2018-04-22 21:23:12', NULL);
+(21, '555-555-5555', 'password', 'oldSpice', 'tCrews@fake.email', '11 Deodorant Street', 'T.Crews', '2018-04-22 21:23:12', NULL),
+(22, 'NULL', NULL, '22', '22', NULL, 'J.James', '2018-04-24 22:30:22', 1);
 
 -- --------------------------------------------------------
 
@@ -108,7 +109,13 @@ INSERT INTO `customer_payments` (`payment_id`, `amount`, `date`, `Customer_id`, 
 (2, 9.99, '2018-04-21 00:00:00', 3, 2),
 (3, 15.99, '2018-04-22 18:09:44', 19, 3),
 (4, 15.99, '2018-04-22 18:18:37', 6, 4),
-(5, 3.50, '2018-04-22 18:24:29', 7, 5);
+(5, 3.50, '2018-04-22 18:24:29', 7, 5),
+(6, 42.25, '2018-04-24 20:35:57', 6, 8),
+(7, 34.21, '2018-04-24 20:39:25', 6, 9),
+(8, 408.04, '2018-04-24 20:43:43', 7, 10),
+(9, 18.22, '2018-04-24 20:46:35', 6, 11),
+(10, 51.05, '2018-04-24 20:50:32', 18, 12),
+(11, 82.72, '2018-04-24 22:16:48', 1, 14);
 
 -- --------------------------------------------------------
 
@@ -185,19 +192,26 @@ CREATE TABLE `orders` (
   `Payment_id` int(11) DEFAULT NULL,
   `Customer_id` int(11) NOT NULL,
   `Completion_date` datetime DEFAULT NULL,
-  `Item_id` int(11) NOT NULL
+  `Item_list` varchar(1000) NOT NULL,
+  `Total_price` double(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`Order_id`, `Staff_id`, `Payment_id`, `Customer_id`, `Completion_date`, `Item_id`) VALUES
-(1, 1234, 1, 10, '2018-04-21 01:21:38', 1),
-(2, 1235, 2, 3, '2018-04-21 00:00:00', 11111),
-(3, 1235, 3, 19, '2018-04-22 18:09:44', 33333),
-(4, 1234, 4, 6, '2018-04-22 18:18:37', 1),
-(5, 1236, 5, 7, '2018-04-22 18:24:29', 22222);
+INSERT INTO `orders` (`Order_id`, `Staff_id`, `Payment_id`, `Customer_id`, `Completion_date`, `Item_list`, `Total_price`) VALUES
+(1, 1234, 1, 10, '2018-04-21 01:21:38', '1', 15.99),
+(2, 1235, 2, 3, '2018-04-21 00:00:00', '11111', 9.99),
+(3, 1235, 3, 19, '2018-04-22 18:09:44', '33333', 15.99),
+(4, 1234, 4, 6, '2018-04-22 18:18:37', '1', 15.99),
+(5, 1236, 5, 7, '2018-04-22 18:24:29', '22222', 3.50),
+(8, 1234, 6, 6, '2018-04-24 20:35:57', ' 25 36', 42.25),
+(9, 1236, 7, 6, '2018-04-24 20:39:25', ' 1 30', 34.21),
+(10, 1236, 8, 7, '2018-04-24 20:43:43', ' 33 34', 408.04),
+(11, 1234, 9, 6, '2018-04-24 20:46:35', ' 30', 18.22),
+(12, 1234, 10, 18, '2018-04-24 20:50:32', ' 40 100 105', 51.05),
+(14, 1237, 11, 1, '2018-04-24 22:16:48', ' 25 31 43 42', 82.72);
 
 -- --------------------------------------------------------
 
@@ -239,7 +253,8 @@ CREATE TABLE `staff` (
 INSERT INTO `staff` (`EIN`, `Phone`, `Position`, `Name`, `Address`) VALUES
 (1234, '987-311-6544', 'Manager', 'Chris Dieant', '908 MLK Blvd.'),
 (1235, '548-951-2198', 'Store Clerk', 'Sarah Mathews', '54 Airport Rd.'),
-(1236, '654-654-5564', 'Store Clerk', 'Mickie Johnson', '93332 Saddle Ct.');
+(1236, '654-654-5564', 'Store Clerk', 'Mickie Johnson', '93332 Saddle Ct.'),
+(1237, '000-555-5555', 'Online System', 'Online System', 'A hard drive, somewhere.');
 
 -- --------------------------------------------------------
 
@@ -311,7 +326,7 @@ ALTER TABLE `orders`
   ADD KEY `Staff_id` (`Staff_id`),
   ADD KEY `Payment_id` (`Payment_id`),
   ADD KEY `Customer_id` (`Customer_id`),
-  ADD KEY `Item_id` (`Item_id`);
+  ADD KEY `Item_id` (`Item_list`(767));
 
 --
 -- Indexes for table `publishers`
@@ -344,12 +359,12 @@ ALTER TABLE `authors`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `IdNo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `IdNo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `customer_payments`
 --
 ALTER TABLE `customer_payments`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `directors`
 --
@@ -359,7 +374,7 @@ ALTER TABLE `directors`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `Order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `publishers`
 --
@@ -369,7 +384,7 @@ ALTER TABLE `publishers`
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `EIN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1237;
+  MODIFY `EIN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1238;
 --
 -- AUTO_INCREMENT for table `subject`
 --
@@ -401,7 +416,6 @@ ALTER TABLE `items`
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`Customer_id`) REFERENCES `customers` (`IdNo`) ON UPDATE NO ACTION,
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`Payment_id`) REFERENCES `customer_payments` (`payment_id`) ON UPDATE NO ACTION,
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`Item_id`) REFERENCES `items` (`Item_id`) ON UPDATE NO ACTION,
   ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`Staff_id`) REFERENCES `staff` (`EIN`) ON UPDATE NO ACTION;
 COMMIT;
 

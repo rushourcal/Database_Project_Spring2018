@@ -1,3 +1,8 @@
+<?php 
+session_name("database2018");
+session_start();
+include('adminCheck.php');
+?>
 <title>All tables</title>
 <head>
 <?php
@@ -40,7 +45,7 @@
 				$columns = array("Item_id", "Subject_id", "Description", "Price", "Item_image", "Author_id", "Pub_id", "Director_id", "Item_type");
 				break;
 			case "orders":
-				$columns = array("Order_id", "Staff_id", "Payment_id", "Customer_id", "Completion_date", "Item_id");
+				$columns = array("Order_id", "Staff_id", "Payment_id", "Customer_id", "Completion_date", "Item_list", "Total_price");
 				break;
 			case "publishers":
 				$columns = array("Pub_id", "Pub_name");

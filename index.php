@@ -1,20 +1,63 @@
-<title>Bookstore Index</title>
-<body>
-<p>Zachariah Boone</p>
-<p>Michael Teixeira</p>
-<p>Kyle Teixeira</p>
-<h1>Options:</h1>
-<p><a href="addAuthor.php">Add Author</a></p><!--this is a simple link to the addAuthor.php file-->
-<p><a href="addCustomer.php">Add Customer</a></p>
-<p><a href="addItem.php">Add Item</a></p>
-<p><a href="addOrder.php">Add Order</a></p>
-<p><a href="adjustItems.php">Change Item</a></p>
-<p><a href="itemsSold.php">Item Sales</a></p>
-<p><a href="orderLookup.php">Lookup Order</a></p>
-<p><a href="customerLookup.php">Lookup Customer Purchases</a></p>
-<p><a href="deleteCustomer.php">Remove Customer</a></p>
+<?php	
+session_name("database2018");
+session_start();
+if ( (isset($_POST['login'])) || (isset($_SESSION['current_customer'])) || (isset($_SESSION['Admin']))){
+	if(isset($_SESSION['current_customer'])){
+		header('Location: customerOptions.php');
+	}
+	if(isset($_SESSION['Admin'])){
+		header('Location: index2.php');
+	}
+	include_once ('dbconnection.php');
 
+	$Username = mysqli_real_escape_string($link, $_POST['Username']);
+	$Password = mysqli_real_escape_string($link, $_POST['Password']);
+	$adminLogin = "Admin123";
+	if( ($Username == $adminLogin) && ($Password == "database2018") ){
+		mysqli_close($link);
+		$_SESSION['Admin']="Admin";
+		header('Location: index2.php');
+	}else{
+		$sql = "SELECT * FROM `customers` WHERE (`Username` = '$Username' AND `Password` = '$Password');";
+		$result = mysqli_query($link, $sql);
+		if(mysqli_num_rows($result)==1){
+			$row = mysqli_fetch_assoc($result);
+			$_SESSION['current_customer'] = $row['IdNo'];
+			header('Location: customerOptions.php');
+			mysqli_close($link);
+		}else{
+			mysqli_close($link);
+			?> <script>
+			alert("Login information incorrect");
+			</script><?php
+		}
+	}
+}
+?>
+<title>Login</title>
+	<body>
+		<form name="LoginForm" method= "POST"> 
 
-<p><a href="showTables.php">Show all tables (for #2 in part 3)</a></p>
-</body>
+            <table>
+                <tr>
+                    <td>Username:</td>
+                    <td>
+                        <input type="text" name="Username" placeholder="Username" pattern="[a-zA-Z0-9]{8,12}" title="8-12 characters using a-z, A-Z, or 0-9" required>
+                    </td>
+                </tr>
+				<tr>
+                    <td>Password:</td>
+                    <td>
+                        <input type="password" name="Password" placeholder="P4ssw0rd" pattern="[a-zA-Z0-9]{8,12}" title="8-12 characters using a-z, A-Z, or 0-9" required>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><input type="submit" name="login" value="Login">
+                    </td>
+                </tr>
+            </table>
+        </form>
+		<p><a href="index.php">Back</a></p>
+	</body>
 </title>

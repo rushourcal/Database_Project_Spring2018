@@ -1,3 +1,8 @@
+<?php 
+session_name("database2018");
+session_start();
+include('adminCheck.php');
+?>
 <title>Add Author</title>
 	<body>
 		<p>Enter the necessary information to add an Author</p>
@@ -38,5 +43,8 @@
             </table>
         </form>
 		<p><a href="index.php">Back</a></p>
+		<form action="logout.php">
+			<input type="submit" name="logout" value="Logout">
+		</form>
 	</body>
 </title>
